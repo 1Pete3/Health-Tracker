@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block title %}
+    Lifts
+{% endblock %}
+
+{% block body %}
+
+    <div class="container shadow-lg rounded-3 border-2 border border-dark p-5">
+        <h2 class="text-center">Your Lifts</h2>
+        {% if user.is_authenticated %}
+
+        {% else %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>You are not logged in!</strong> Login <a href="{% url 'login' %}"
+                                                                 class="alert-link">here</a> or
+                press the button below!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+        <hr>
+        <div class="row">
+            <div class="col-6">
+                <a href="{% url 'create_lift' %}" class="btn btn-dark p-2 my-2">Add a Lift</a>
+            </div>
+            <div class="col-6 text-end">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}" class="btn btn-danger p-2 my-2">Logout</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-danger p-2 my-2">Login</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row justify-content-md-center">
+                <ul class="nav nav-pills nav-fill">
+                    <div class="col-12 col-sm-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href={% url 'home_lifts' %}>Logged
+                                Lifts</a>
+                        </li>
+                    </div>
+
+                    <div class="col-12 col-sm-3">
+                        <li class="nav-item ">
+                            <a class="nav-link " href={% url 'home_nutrition' %}>Nutrition</a>
+                        </li>
+                    </div>
+
+                    <div class="col-12 col-sm-3">
+                        <li class="nav-item">
+                            <a class="nav-link " href={% url 'home_weight' %}>Weight Tracker</a>
+                        </li>
+                    </div>
+
+                    <div class="col-12 col-sm-3">
+                        <li class="nav-item">
+                            <a class="nav-link " href={% url 'motivation' %}>Gym Motivation</a>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+
+        <div class="table-responsive-md">
+            <table class="table table-dark table-striped table-hover ">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Lift Name</th>
+                    <th scope="col">Sets</th>
+                    <th scope="col">Reps</th>
+                    <th scope="col">Weight</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for lifts in lift %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td><i class="fas fa-dumbbell"></i> {{ lifts.lift_name }}</td>
+                        <td>{{ lifts.sets }}</td>
+                        <td>{{ lifts.reps }}</td>
+                        <td>{{ lifts.weight }} lbs</td>
+                        <td>{{ lifts.date }}</td>
+                        <td>
+                            <a href="{% url 'edit_lift' lifts.id %}" class="update-icon">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'delete_lift' lifts.id %}" class="update-icon">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Delete Nutrition
+{% endblock %}
+
+{% block body %}
+    <div class="container shadow-lg rounded-3 border-2 border border-dark p-3 text-center">
+        <h1>Confirm</h1>
+        <form method="post" action="{% url 'delete_food' food.id %}">
+            {% csrf_token %}
+            <h4>Are you sure that you want to delete {{food.food_item}} on {{food.date}} ?</h4>
+            <a href="{% url 'home_nutrition' %}" class="btn btn-dark"><i class="fas fa-arrow-left"></i> Go Back</a>
+            <button type="submit" class="btn btn-danger">Yes, lose calories!</button>
+        </form>
+    </div>
+
+{% endblock %}

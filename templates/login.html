@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load socialaccount %}
+{% block body %}
+    {% load crispy_forms_tags %}
+    <div class="row my-5 align-items-center justify-content-center">
+        <div class="col-8 col-lg-4 col-xl-3">
+            <div class="card border-2 shadow-lg">
+                <div class="card-body text-center py-4">
+                    <h4 class="card-title">Login</h4>
+                    <hr>
+                    <form action="{% url 'login' %}" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" name="username" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <a href="{% url 'register' %}" class="form-text">Don't have an account? Register here</a>
+                        <br>
+                        <button type="submit" class="btn btn-dark my-3">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

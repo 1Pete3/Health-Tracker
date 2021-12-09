@@ -1,0 +1,20 @@
+body {
+    background-color:floralwhite;
+}
+
+.motivation-image {
+    width: 500px;
+    height: 600px;
+}
+.fa-trash {
+    color:red;
+}
+
+.fa-weight {
+    color: darkviolet;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #292b2c ;
+}
+

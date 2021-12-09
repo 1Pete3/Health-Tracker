@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block title %}
+    Nutrition
+{% endblock %}
+
+{% block body %}
+    <div class="container shadow-lg rounded-3 border-2 border border-dark p-5">
+        <h2 class="text-center">You Are What You Eat</h2>
+
+        {% if user.is_authenticated %}
+
+        {% else %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>You are not logged in!</strong> Login <a href="{% url 'login' %}" class="alert-link">here</a> or
+                press the button below!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+
+        <hr>
+         <div class="container-fluid">
+            <div class="row justify-content-md-center">
+                <div class="col-6 ">
+                    <a href="{% url 'create_food' %}" class="btn btn-dark p-2 my-2">Add a New Food</a>
+                </div>
+                <div class="col-6 text-end">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}" class="btn btn-danger p-2 my-2">Logout</a>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="btn btn-danger p-2 my-2">Login</a>
+                    {% endif %}
+                </div>
+            </div>
+         </div>
+
+
+            <div class="container-fluid">
+                <div class="row justify-content-md-center">
+                    <ul class="nav nav-pills nav-fill">
+                        <div class="col-12 col-sm-3">
+                            <li class="nav-item">
+                                <a class="nav-link " aria-current="page" href={% url 'home_lifts' %}>Logged
+                                    Lifts</a>
+                            </li>
+                        </div>
+
+                        <div class="col-12 col-sm-3">
+                            <li class="nav-item ">
+                                <a class="nav-link active" href={% url 'home_nutrition' %}>Nutrition</a>
+                            </li>
+                        </div>
+
+                        <div class="col-12 col-sm-3">
+                            <li class="nav-item">
+                                <a class="nav-link " href={% url 'home_weight' %}>Weight Tracker</a>
+                            </li>
+                        </div>
+
+                        <div class="col-12 col-sm-3">
+                            <li class="nav-item">
+                                <a class="nav-link " href={% url 'motivation' %}>Gym Motivation</a>
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+    <div class="table-responsive-md">
+            <table class="table table-dark table-striped table-hover">
+                <thead>
+                <tr>
+                    <th scope="col-1 col-md">Id</th>
+                    <th scope="col-2 col-md">Food Item</th>
+                    <th scope="col-1 col-md">Calories</th>
+                    <th scope="col-1 col-md">Protein</th>
+                    <th scope="col-2 col-md">Carbohydrates</th>
+                    <th scope="col-1 col-md">Fat</th>
+                    <th scope="col-1 col-md">Date</th>
+                    <th scope="col-1 col-md">Edit</th>
+                    <th scope="col-1 col-md">Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for food in nutrition %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ food.food_item }}</td>
+                        <td>{{ food.calories }}</td>
+                        <td>{{ food.protein }} g</td>
+                        <td>{{ food.carbohydrates }} g</td>
+                        <td>{{ food.fat }}g</td>
+                        <td>{{ food.date }} </td>
+                        <td>
+                            <a href="{% url 'edit_food' food.id %}" class="update-icon">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'delete_food' food.id %}" class="update-icon">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

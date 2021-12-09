@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    Edit Weight
+{% endblock %}
+
+{% block body %}
+    <div class="container shadow-lg rounded-3 border-2 border border-dark p-5 text-align">
+        <h1 class="text-center">Update Weight</h1>
+        <div class="container border border-dark rounded-3 border-2 p-3">
+            <form method="post" action="{% url 'edit_weight' weight.id %}">
+                {% csrf_token %}
+                {{ form|crispy }}
+                    <div class="text-center pt-3">
+                        <a href="{% url 'home_weight' %}" class="btn btn-dark"><i class="fas fa-arrow-left"></i> Go Back</a>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+            </form>
+        </div>
+
+
+    </div>
+
+{% endblock %}

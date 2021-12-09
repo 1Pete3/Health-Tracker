@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="row my-5 align-items-center justify-content-center">
+        <div class="col-8 col-lg-4 col-xl-3">
+            <div class="card border-2 shadow-lg">
+                <div class="card-body text-center py-4">
+                    <h4 class="card-title">Register</h4>
+                    <hr>
+                    <form action="{% url 'register' %}" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" name="username" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password1" class="form-label">Password</label>
+                            <input type="password" name="password1" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password2" class="form-label">Confirm Password</label>
+                            <input type="password" name="password2" class="form-control">
+                        </div>
+                        <a href="{% url 'login' %}" class="form-text">Already have an account? Login here</a>
+                        <br>
+                        <button type="submit" class="btn btn-dark my-3">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </form>
+{% endblock %}

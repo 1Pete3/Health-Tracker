@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    Edit Lift
+{% endblock %}
+
+{% block body %}
+    <div class="container shadow-lg rounded-3 border-2 border border-dark p-5 text-align">
+        <h1 class="text-center">Edit Your {{lift.lift_name}}</h1>
+        <form method="post" action="{% url 'edit_lift' lift.id %}">
+            <div class="form-group">
+                {% csrf_token %}
+                <div class="container border border-dark rounded-3 border-2 p-3">
+                    {{form|crispy}}
+                    <div class="text-center pt-3">
+                        <a href="{% url 'home_lifts' %}" class="btn btn-dark"><i class="fas fa-arrow-left"></i> Go Back</a>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
